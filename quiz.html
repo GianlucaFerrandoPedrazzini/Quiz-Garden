@@ -27,7 +27,7 @@
             <p></p>
             <div class="contenedor">
                 <div class="azul center">
-                    <button type="button" class="btn btn-secondary">A vegetable</button>
+                    <a href="#" class="btn btn-secondary sombra1 respuesta" data-respuesta="A vegetable">A vegetable</a>
                 </div>
                 <div class="naranja center">
                     <button type="button" class="btn btn-secondary">A fruit</button>
@@ -44,18 +44,17 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         let contador = 60;
         function cronometro(){
             contador--;
             document.getElementById("temporizador").textContent=contador;
             if (contador <= 0) {
-            contador="Te quedaste sin tiempo";
+            document.getElementById("temporizador").textContent="Te quedaste sin tiempo";
             }
         }
         setInterval(cronometro, 1000);
-        
     </script>
 
 </body>
