@@ -1,6 +1,47 @@
+@font-face {
+    font-family: 'TituloQuiz';
+    src: url('fonts/legrand/Legrand-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('img/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;  
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Binggo';
+    src: url('fonts/Binggo_Wood/demo-binggo-wood-display.otf') format('truetype');
+    font-weight: normal;  
+    font-style: normal;
+}
+
+a{
+    margin-top: auto;
+}
+
 body{
-    background-color: #dff89c;
     margin: 5%;
+    background: repeating-linear-gradient(40deg,#dff89c,#dff89c 20px,#e8fcb0 20px,#e8fcb0 40px);
+}
+
+table {
+    border-collapse: separate; /* Esto es para que funcione el tema del border-raduis */
+    border-spacing: 5;         /* esto es el borde de las celdas */
+    border-radius: 15px;       /* Este es el redondeado, uso el "px" y no el "%" debido a que queda raro el "%" */
+    overflow: hidden;          /* Esto hace que el border radius tenga efecto */
+    background-color: #bbb2a0; /* fondo de la tabla */
+    width: 90%;                /* ancho opcional */
+    margin: 2rem auto;         /* centrado */
+}
+
+.titulo-menu {
+    font-family: 'TituloQuiz', sans-serif;
+    font-size: 5rem;
+    text-align: center;
 }
 
 .cartel{
@@ -14,6 +55,8 @@ body{
         #7dc242 0 20px,
         #dcedb5 20px 40px 
     )40;
+    width: 100vw;  
+    margin-left: calc(-5%); /* para compensar el margen del body */
 }
 
 .center{
@@ -42,14 +85,59 @@ body{
 }
 
 .btn-inicio{
-    display: block;
+    display: flex;
     margin: 0 auto;
+    align-items: center;
+    justify-content: center;
     width: 40%;
     height: 10vh;
+    font-family: 'OpenSans', sans-serif;
+    font-size: 36px;
+    border-radius: 20px;
+}
+
+.sombra1{
+    box-shadow: 2px 2px 3px #255823 ;
 }
 
 .tabla{
     width: 70vw;
+}
+
+/* Contenedor de la tabla estética */
+.tabla-container {
+    margin: 2rem auto;
+    max-width: 600px;
+    border-radius: 20px;
+    overflow: hidden; /* para bordes redondeados */
+    box-shadow: 2px 2px 6px #255823; /* sombra suave */
+}
+
+/* Estilo de la tabla */
+.custom-table {
+    background-color: #f8ecd4; /* combina con .cartel */
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.custom-table th {
+    background-color: #e8fcb0; /* cabecera más clara */
+    text-align: center;
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.8rem 0;
+}
+
+.custom-table td {
+    text-align: center;
+    font-family: 'OpenSans', sans-serif;
+    padding: 0.8rem 0;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #dff89c; /* resalta fila al pasar el mouse */
+    transition: background-color 0.3s ease;
 }
 
 .div-quiz {
@@ -139,110 +227,14 @@ body{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    position: relative; /* necesario para posicionar elementos absolutos dentro */
 }
 
-
-.barra-tiempo {
-    position: absolute;
-    top: 10px; /* ajusta según necesidad */
-    left: 10px;
+.respuesta {
+    margin: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
     display: flex;
-    align-items: center;
-    background-color: #f8ecd4;
-    border: 2px solid #b46fff;
-    border-radius: 20px;
-    padding: 5px 10px;
-    z-index: 2; /* para que quede por encima de .div-quiz */
-}
-
-.icono-reloj {
-    width: 32px;
-    height: 32px;
-    background: radial-gradient(circle at center, #f0f0f0 70%, #ccc 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    margin-right: 10px;
-    border: 2px solid #aaa;
-    position: relative;
-}
-
-.reloj-agujas {
-    width: 12px;
-    height: 12px;
-    position: relative;
-}
-
-.reloj-agujas::before {
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 8px;
-    background: #b46fff;
-    top: 0;
-    left: 5px;
-    transform: rotate(45deg);
-    transform-origin: bottom;
-}
-
-.barra-exterior {
-    width: 200px;
-    height: 20px;
-    background: #bbb;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.barra-interior {
-    height: 100%;
-    width: 100%;
-    background: #b46fff;
-    border-radius: 10px;
-    transition: width 1s linear;
-}
-
-.div_info{
-    background-color: #f8ecd4;
-    margin: 0% auto;
-    padding: 5%;
-    width: 80%;
-    height: 80vh;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-.next{
-    background-color: #7dc242;
-    border-radius: 10px;
-    padding: 2%;
-    width: 20%;
-    position: relative;
-}
-
-.next_button{
-    --bs-btn-color:#000000;
-    --bs-btn-bg: #d9d9d9;
-    --bs-btn-border-color: #d9d9d9;
-    --bs-btn-hover-color:#000000;
-    --bs-btn-hover-bg: #d9d9d9;
-    --bs-btn-hover-border-color: #d9d9d9;
-    --bs-btn-focus-shadow-rgb:130,138,145;
-    --bs-btn-active-color:#000000;
-    --bs-btn-active-bg: #d9d9d9;
-    --bs-btn-active-border-color:#51585e;
-    --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color:#fff;
-    --bs-btn-disabled-bg:#6c757d;
-    --bs-btn-disabled-border-color:#6c757d;
-}
-
-.next_div{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    align-items:flex-end;
+    align-items: center;
 }
