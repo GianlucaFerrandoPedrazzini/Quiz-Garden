@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Garden</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="div">
+        <div class="barra-tiempo">
+            <div class="icono-reloj">
+                <div class="reloj-agujas"></div>
+            </div>
+            <div class="barra-exterior">
+                <div class="barra-interior" id="barraProgreso"></div>
+            </div>
+        </div>
+
+
+        <div id="temporizador" class="temporizador">60</div>
+        <div class="div-quiz">
+            <div class="center pregunta">
+                <p>A potato is...</p>
+            </div>
+            <p></p>
+            <div class="contenedor">
+                <div class="azul center">
+                    <button type="button" class="btn btn-secondary">A vegetable</button>
+                </div>
+                <div class="naranja center">
+                    <button type="button" class="btn btn-secondary">A fruit</button>
+                </div>
+            </div>
+            <p></p>
+            <div class="contenedor">
+                <div class="morado center">
+                    <button type="button" class="btn btn-secondary">A tubercle</button>
+                </div>
+                <div class="rojo center">
+                    <button type="button" class="btn btn-secondary">A good defense for zombies</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let contador = 60;
+        function cronometro(){
+            contador--;
+            document.getElementById("temporizador").textContent=contador;
+            if (contador <= 0) {
+            contador="Te quedaste sin tiempo";
+            }
+        }
+        setInterval(cronometro, 1000);
+        
+    </script>
+
+</body>
+</html>
