@@ -158,11 +158,12 @@
             if (contador <= 0) {
             document.getElementById("temporizador").textContent="Te quedaste sin tiempo";
             }
-            if (contador < 58){
-                puntaje = puntaje - 16.6
+            if (contador < 58) and (contador > 0){
+                puntaje = puntaje - 17.55
             }
         }
         setInterval(cronometro, 1000);
     </script>
 </body>
+
 </html>
