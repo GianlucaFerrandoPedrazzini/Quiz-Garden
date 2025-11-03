@@ -1,5 +1,11 @@
 <?php
     session_start(); //Inicio la sesión
+
+    if (!isset($_SESSION["orden"]) || !isset($_SESSION["ronda"])) {
+        header("Location: index.php");
+        exit();
+    }
+
     //Extraigo los datos de las variables "orden", "ronda" y "orden_og" para usarlos en este archivo
     //sin tener que citar a la sesión a cada rato
     $preguntas = $_SESSION["orden"];
@@ -10,49 +16,15 @@
 
     //Analizo en qué número de ronda está el jugador y en base a eso cambio los textos de la pregunta
     //y los botones por los ordenados aleatoriamente
-    if($ronda == 1){ //Si es la ronda 1
-        //pongo a la variable con el texto de la pregunta como la pregunta del primer array mezclado
-        $quiz = $preguntas[0][0]; 
-        //pongo a las variables con el texto de los botones como las posibles respuestas del primer
-        //array mezclado
-        $respuesta1 = $preguntas[0][1];
-        $respuesta2 = $preguntas[0][2];
-        $respuesta3 = $preguntas[0][3];
-        $respuesta4 = $preguntas[0][4];
-    }
-
-    //Así funciona sucesivamente con el resto de rondas, sería como el número de ronda corresponde a
-    //cúal array de la matriz se va a mostrar (solo que si es la ronda 1 sería el array 0, ronda 2
-    //array 1 y así)
-
-    elseif($ronda == 2){
-        $quiz = $preguntas[1][0];
-        $respuesta1 = $preguntas[1][1];
-        $respuesta2 = $preguntas[1][2];
-        $respuesta3 = $preguntas[1][3];
-        $respuesta4 = $preguntas[1][4];
-    }
-    elseif($ronda == 3){
-        $quiz = $preguntas[2][0];
-        $respuesta1 = $preguntas[2][1];
-        $respuesta2 = $preguntas[2][2];
-        $respuesta3 = $preguntas[2][3];
-        $respuesta4 = $preguntas[2][4];
-    }
-    elseif($ronda == 4){
-        $quiz = $preguntas[3][0];
-        $respuesta1 = $preguntas[3][1];
-        $respuesta2 = $preguntas[3][2];
-        $respuesta3 = $preguntas[3][3];
-        $respuesta4 = $preguntas[3][4];
-    }
-    else{
-        $quiz = $preguntas[4][0];
-        $respuesta1 = $preguntas[4][1];
-        $respuesta2 = $preguntas[4][2];
-        $respuesta3 = $preguntas[4][3];
-        $respuesta4 = $preguntas[4][4];
-    }
+    //pongo a la variable con el texto de la pregunta como la pregunta del primer array mezclado
+    $quiz = $preguntas[$ronda][0]; 
+    //pongo a las variables con el texto de los botones como las posibles respuestas del primer
+    //array mezclado
+    $respuesta1 = $preguntas[$ronda][1];
+    $respuesta2 = $preguntas[$ronda][2];
+    $respuesta3 = $preguntas[$ronda][3];
+    $respuesta4 = $preguntas[$ronda][4];
+    
 
     //Reviso a qué pregunta del orden original corresponde la que se está mostrando actualmente y en base
     //a eso me fijo si la respuesta que elije es correcta (y le doy 1000 puntos) o incorrecta (y le doy 0
@@ -120,7 +92,6 @@
         }
     }
     if ($fin == 1){ //Si se define que se terminó de responder 
-        $_SESSION["ronda"] = $ronda + 1; //sumo 1 al número de rondas recorridas
         header("Location: informacion.php"); //envío al jugador al archivo con la data de la respuesta
         exit();//hago que se deje de ejecutar este código (es necesario cuando se usa "header()")
     }

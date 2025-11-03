@@ -24,7 +24,7 @@ a{
 }
 
 body{
-    margin: 5%;
+    padding: 5% 5%;
     background: repeating-linear-gradient(40deg,#dff89c,#dff89c 20px,#e8fcb0 20px,#e8fcb0 40px);
 }
 
@@ -153,7 +153,6 @@ table {
 }
 
 .pregunta{
-    padding: 10% 5% 10% 5%;
     background-color: white;
     font-weight: bold;
     border-radius: 20px;

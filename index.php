@@ -18,7 +18,7 @@
     <!--Este es el form que uso para llevar a cabo el "setup" en php y para saber el nombre del jugador-->
     <form method="POST" class="center">
         <label>¡Ingresá tu nombre!<br>
-        <input type="text" name="nombre"><br>
+        <input type="text" name="nombre" required><br>
         <input type="submit" value="Enviar"><br><br>
     </form>
 
@@ -76,24 +76,15 @@
             //Inicio la sesión. Todas las variables de la sesión pueden usarse en los otros archivos
             //en los que también se inicie la sesión
             session_start(); 
-
-            //Defino los datos de la base de datos (en este caso es una local. Cambiar por la de
-            //infinityfree)
-            $servidor = "localhost";
-            $usuario = "root";
-            $clave = "";
-            $bd = "quiz_garden";
-            //Guardo los datos de la base en una variable que sirve para establecer la conexión
-            $conexion = mysqli_connect($servidor, $usuario, $clave, $bd);
             
             //Defino variables con arrays cuyo contenido son las preguntas de los quizes en el índice 0 y
             //las posibles respuestas en los siguientes. En este caso las preguntas están dispuestas en
             //orden en el que están en el documento del videojuego pero las respuestas están mezcladas
-            $pregunta1 = ["A potato is...", "A tubercle", "A vegetable", "A fruit", "A good defense for zombies"];
-            $pregunta2 = ["An eggplant is...", "A tubercle", "A vegetable", "A fruit", "A good defense for zombies"];
-            $pregunta3 = ["Why do people use a greenhouse?", "To play videogames", "To grow plants all year round", "To study", "To cook"];
-            $pregunta4 = ["Which one is part of a flower?", "Metal", "Leaf", "Root", "Petal"];
-            $pregunta5 = ["What part of the plant is under the soil?", "Stem", "Fruit", "Root", "Flower"];
+            $pregunta1 = ["A potato is...", "A tubercle", "A vegetable", "A fruit", "A good defense for zombies", "The potato is a tubercle commonly used for making potato chips", "papa.jpg"];
+            $pregunta2 = ["An eggplant is...", "A tubercle", "A vegetable", "A fruit", "A good defense for zombies", "An eggplant is a fruit because it has seeds on its inside", "berenjena.png"];
+            $pregunta3 = ["Why do people use a greenhouse?", "To play videogames", "To grow plants all year round", "To study", "To cook", "Greenhouses are used for growing plants all year round because they maintain a regular environmental condition and protect them from plagues and others natural dangers", "invernadero.jpeg"];
+            $pregunta4 = ["Which one is part of a flower?", "Metal", "Leaf", "Root", "Petal", "The petal is part of the flower and is commonly recognized for its vivid colors and different shapes and sizes", "flor.jpeg"];
+            $pregunta5 = ["What part of the plant is under the soil?", "Stem", "Fruit", "Root", "Flower", "The only part of the plant that is under the soil is the root. It helps them nourish themselves and keep attached to the floor", "root.png"];
             
             //Meto todos los arrays de las preguntas en otro array creando una matriz y las mezclo
             $preguntas = [$pregunta1, $pregunta2, $pregunta3, $pregunta4, $pregunta5];
@@ -115,10 +106,10 @@
             //Guardo el valor 1 en la variable "ronda" de la sesión. Esta variable va a servir para saber
             //cuántas veces se respondieron preguntas (es como un while con variable incremental de
             //condición de salida solo que ente archivos)
-            $_SESSION["ronda"] = 1;
+            $_SESSION["ronda"] = 0;
             //Creo un array que voy guardando en la variable "jugador" de la sesión, el cual contiene
             //el nombre del jugador y sus puntajes que se guardan en el orden original de las preguntas
-            $_SESSION["jugador"] = [$_POST["nombre"], "", "", "", "", ""];
+            $_SESSION["jugador"] = [$_POST["nombre"], "", "", "", "", "", ""];
         }
     ?>
 </html>

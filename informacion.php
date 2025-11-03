@@ -1,3 +1,42 @@
+<?php
+    session_start();
+    
+    //Defino los datos de la base de datos (en este caso es una local. Cambiar por la de
+    //infinityfree)
+    $servidor = "localhost";
+    $usuario = "root";
+    $clave = "";
+    $bd = "quiz_garden";
+    //Guardo los datos de la base en una variable que sirve para establecer la conexión
+    $conexion = mysqli_connect($servidor, $usuario, $clave, $bd);
+
+    if (!isset($_SESSION["orden"]) || !isset($_SESSION["ronda"])) {
+        header("Location: index.php");
+        exit();
+    }
+
+    $next = "quiz.php";
+
+    $preguntas = $_SESSION["orden"];
+    $ronda = $_SESSION["ronda"];
+    
+    $informacion = $preguntas[$ronda][5];
+    $imagen = $preguntas[$ronda][6];
+
+    if ($ronda == 4){
+        $next = "index.php";
+
+        $datos = $_SESSION['jugador'];
+
+        $total = $datos[1] + $datos[2] + $datos[3] + $datos[4] + $datos[5];
+
+        $enviar = "INSERT INTO jugadores (nombre, pregunta1, pregunta2, pregunta3, pregunta4, pregunta5, total_puntos) VALUES ('$datos[0]', '$datos[1]', '$datos[2]', '$datos[3]', '$datos[4]', '$datos[5]', '$total')";
+
+        mysqli_query($conexion, $enviar);
+    }
+    $_SESSION["ronda"] = $ronda + 1; //sumo 1 al número de rondas recorridas
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,21 +49,18 @@
 <body>
     <div class="div_info">
         <div class="center pregunta sombra_info">
-            <img height="70" width="50%" src="img/@butt_oreo on twitter.jpeg" alt="Imagen" class="img">
+            <img height="30%" width="30%" src="img/<?php echo $imagen; ?>" alt="Imagen" class="img">
         </div>
         <br>
         <div class="center pregunta">
-            <p>Oh, wow, un Hollow Knight</p>
+            <p><?= $informacion ?></p>
         </div>
     </div>
     <p></p>
     <div class="next_div">
         <div class="next center">
-            <a href="quiz.php" type="button" class="btn next_button">Next</a>
+            <a href="<?php echo $next ?>" type="button" class="btn next_button">Next</a>
         </div>    
     </div>
-    <?php
-        session_start();
-    ?>
 </body>
 </html>
