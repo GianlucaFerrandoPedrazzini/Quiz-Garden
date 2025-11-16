@@ -26,7 +26,6 @@ a{
 body{
     padding: 5% 5%;
     background: repeating-linear-gradient(40deg,#dff89c,#dff89c 20px,#e8fcb0 20px,#e8fcb0 40px);
-    height: 100vh;
 }
 
 table {
@@ -154,10 +153,9 @@ table {
 }
 
 .pregunta{
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     font-weight: bold;
     border-radius: 20px;
-    margin: 10vh 80vw;
 }
 
 .azul{
@@ -215,7 +213,7 @@ table {
 .temporizador {
     margin-right: 10%;
     font-weight: bold;
-    text-shadow: 2px 2px rgb(255, 255, 255);
+    text-shadow: 2px 2px white;
     font-size: 18px;
     padding: 2% 5%;
     background: #d0ccb4; 
@@ -238,14 +236,4 @@ table {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.puntaje{
-    background-color: rgb(255, 255, 255);
-    padding: 40px 50px;
-    border-radius: 20px;
-}
-
-.ancho{
-    width:50vw;
 }

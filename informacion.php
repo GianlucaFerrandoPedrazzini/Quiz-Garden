@@ -1,40 +1,33 @@
-<?php
-    session_start();
-    
-    //Defino los datos de la base de datos (en este caso es una local. Cambiar por la de
-    //infinityfree)
-    $servidor = "localhost";
-    $usuario = "root";
-    $clave = "";
-    $bd = "quiz_garden";
-    //Guardo los datos de la base en una variable que sirve para establecer la conexión
-    $conexion = mysqli_connect($servidor, $usuario, $clave, $bd);
+<?php session_start();
 
-    if (!isset($_SESSION["orden"]) || !isset($_SESSION["ronda"])) {
-        header("Location: index.php");
-        exit();
+    $ronda = $_SESSION["ronda"];
+
+    //Por default el texto del botón para pasar a la siguiente pregunta es "Next"
+    $next_button = "Next";
+    
+    //Si la ronda fue la última cambio el texto del botón por "End"
+    if ($ronda == 4){
+        $next_button = "End";
     }
 
-    $next = "quiz.php";
-
+    //Traigo todos los datos necesarios para mostrar la información de la respuesta correcta
     $preguntas = $_SESSION["orden"];
     $ronda = $_SESSION["ronda"];
-    
     $informacion = $preguntas[$ronda][5];
     $imagen = $preguntas[$ronda][6];
 
-    if ($ronda == 4){
-        $next = "index.php";
-
-        $datos = $_SESSION['jugador'];
-
-        $total = $datos[1] + $datos[2] + $datos[3] + $datos[4] + $datos[5];
-
-        $enviar = "INSERT INTO jugadores (nombre, pregunta1, pregunta2, pregunta3, pregunta4, pregunta5, total_puntos) VALUES ('$datos[0]', '$datos[1]', '$datos[2]', '$datos[3]', '$datos[4]', '$datos[5]', '$total')";
-
-        mysqli_query($conexion, $enviar);
+    //Si se presiona el botón para pasar a la siguiente pregunta:
+    if (isset($_POST["pasar"])){
+        if ($ronda < 4){ //Si la ronda no fue la última:
+            $_SESSION["ronda"] = $ronda + 1; //sumo 1 al número de rondas recorridas
+            header("Location: quiz.php"); //Redirijo al jugador al archivo del quiz
+            exit();
+        }
+        else{ //Si la ronda fue la última
+            header("Location: final.php"); //Redirijo al jugador al archivo final.php
+            exit();
+        }
     }
-    $_SESSION["ronda"] = $ronda + 1; //sumo 1 al número de rondas recorridas
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +37,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Garden</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style3.css">
 </head>
 <body>
+    <!-- Div para toda la información -->
     <div class="div_info">
+        <!-- Div con la imagen ilustrativa -->
         <div class="center pregunta sombra_info">
             <img height="30%" width="30%" src="img/<?php echo $imagen; ?>" alt="Imagen" class="img">
         </div>
         <br>
+        <!-- Div con la información textual que da contexto a la respuesta -->
         <div class="center pregunta">
-            <p><?= $informacion ?></p>
+            <p><?php echo $informacion ?></p>
         </div>
     </div>
     <p></p>
     <div class="next_div">
+        <!-- Div para dejar bonito el botón -->
         <div class="next center">
-            <a href="<?php echo $next ?>" type="button" class="btn next_button">Next</a>
+            <!-- Post con el botón para pasar a la siguiente pregunta -->
+            <form method="post">
+                <button type="submit" name="pasar" class="btn next_button"><?php echo $next_button?></button>
+            </form>
         </div>    
     </div>
 </body>

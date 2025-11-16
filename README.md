@@ -1,0 +1,3 @@
+Este proyecto consiste en un quiz con 5 preguntas que se muestran en un orden aleatorio y después de cada una de ellas se enseña información y una imagen que ilustren la respuesta correcta. El puntaje de cada jugador se define por si respondieron correctamente la pregunta o no y cuánto tardaron en hacerlo. Además, los mejores jugadores se pueden observar en el inicio, en el que se evidencia el top 5 de ellos o en el archivo "scores.php" en el que se muestran todos los jugadores con sus puntajes ordenados de mayor a menor.
+
+Para poder ejecutar estos archivos se necesita tener una base de datos creada llamada "quiz_garden" con la tabla "jugadores" y las columnas "id", "nombre", "pregunta1", "pregunta2", "pregunta3", "pregunta4", "pregunta5" y "total_puntos".
